@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>Home</title>
+		<link rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.3/css/bootstrap.min.css}"/>
+	</head>
+	<body class="container-fluid">
+	
+		<th:block th:replace="fragments :: searchForm()"></th:block>
+	
+		<h1 class="text-center">Menu pizze:</h1>
+		
+		<h2 th:if="${pizze.size() == 0}">Nessuna pizza trovata</h2>
+		
+		<ul th:if="${pizze != null}">
+			<li th:each="pizza : ${pizze}" th:object="${pizza}" class="my-1">
+				<a th:href="@{/pizze/{id} (id=*{id})}">[[ ${pizza.name} ]]</a>
+				<a
+					th:href="@{/pizze/update/{id} (id=*{id})}"
+					class="btn btn-warning"
+					th:text="Modifica"
+				></a>
+				<a
+					th:href="@{/pizze/delete/{id} (id=*{id})}"
+					class="btn btn-danger"
+					th:text="Elimina"
+				></a>
+			</li>
+		</ul>
+		
+		<a th:href="@{/pizze/create}" class="btn btn-primary">Crea la tua pizza!</a>
+		<a th:href="@{/ingredienti}" class="btn btn-primary">Visualizza gli ingredienti!</a>
+		
+	</body>
+</html>

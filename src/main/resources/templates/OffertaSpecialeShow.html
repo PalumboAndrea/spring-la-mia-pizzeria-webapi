@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>Offerta Speciale</title>
+		<link rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.3/css/bootstrap.min.css}"/>
+	</head>
+	<body class="container-fluid">
+	
+		<div class="container" th:object="${offertaSpeciale}">
+		
+			<ul>
+				<li class="my-1">
+					<h3>
+						Titolo:
+					</h3>
+					<span>
+						 [[ *{title} ]]
+					</span>
+				</li>
+				<li class="my-1">
+					<h3>
+						Data inizio offerta:
+					</h3>
+					<span>
+						 [[ *{startingDate} ]]
+					</span>
+				</li>
+				<li class="my-1">
+					<h3>
+						Data fine offerta:
+					</h3>
+					<span>
+						[[ *{endingDate} ]]
+					</span>
+				</li>
+				<li class="my-1">
+					<h3>
+						Sconto:
+					</h3>
+					<span>
+						[[ *{discount} ]]%
+					</span>
+				</li>
+			</ul>
+		
+		</div>
+			
+	</body>
+</html>

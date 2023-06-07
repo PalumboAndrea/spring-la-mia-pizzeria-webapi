@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>fragments</title>
+		<link rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.3/css/bootstrap.min.css}"/>
+	</head>
+	<body>
+	
+		<div th:fragment="backHome()" class="mt-3 text-center">
+			<a
+			th:href="@{/home}"
+			class="btn btn-primary"
+			>
+				Torna al menu
+			</a>
+		</div>
+		
+		<div th:fragment="updateDeleteBtn (root)" th:with="title=${title}">
+		    <a
+				th:href="${root}/{id} (id=*{id})"
+				class="btn btn-primary"
+				th:text="${title}"
+			>
+				
+			</a>
+		</div>
+		
+		<div th:fragment="updateDeleteBtn1" class="mt-3 text-center">
+			<a
+				th:href="@{link}"
+				class="btn btn-primary"
+				th:text="${title}"
+			>
+				
+			</a>
+		</div>
+		
+		<form 
+			class="row g-3 my-3"
+			th:fragment="searchForm()"
+			th:action="@{/pizze/by/name}"
+			method="POST"
+		>
+		  <div class="col-auto d-flex align-items-center">
+		    <label>Cerca tramite il nome della pizza</label>
+		  </div>
+		  <div class="col-auto">
+		    <label class="visually-hidden">Nome</label>
+		    <input type="text" name="name" class="form-control" placeholder="Nome" th:value="${name}">
+		  </div>
+		  <div class="col-auto">
+		    <button type="submit" class="btn btn-success">Cerca</button>
+		  </div>
+		</form>
+		
+	</body>
+</html>

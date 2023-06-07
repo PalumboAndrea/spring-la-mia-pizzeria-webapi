@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>[[ ${pizza.name} ]]</title>
+		<link rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.3/css/bootstrap.min.css}"/>
+	</head>
+	<body class="container-fluid">
+	
+		<div class="container">
+			
+			<div class="row">
+				<div class="col-6">
+					<h1>Nome:</h1>
+				</div>
+				
+				<div class="col-6">
+					<h2>[[ ${pizza.name} ]]</h2>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-6">
+					<h1>Descrizione:</h1>
+				</div>
+				
+				<div class="col-6">
+					<h2>[[ ${pizza.description} ]]</h2>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-6">
+					<h1>Prezzo:</h1>
+				</div>
+				
+				<div class="col-6">
+					<h2>[[ ${pizza.price} ]] euro</h2>
+				</div>
+			</div>
+		
+		</div>
+		
+		<div>
+			<h3>
+				Offerte speciali attive:
+			</h3>
+			<ul>
+				<li th:each="offSpeciale : ${offSpeciali}" th:object="${offSpeciale}" class="my-1">
+					<a th:href="@{/offertaSpeciale/{id} (id=*{id})}">[[ *{title} ]]</a>
+					<span>--> prezzo della pizza con sconto: [[ ${pizza.price} - ${pizza.price} / 100 * *{discount} ]]euro </span>
+					<a
+						th:href="@{/OffertaSpeciale/update/{id} (id=*{id})}"
+						class="btn btn-warning"
+						th:text="Modifica"
+					></a>
+					<a
+						th:href="@{/OffertaSpeciale/delete/{id} (id=*{id})}"
+						class="btn btn-danger"
+						th:text="Elimina"
+					></a>
+				</li>
+			</ul>
+			<a
+			th:href="@{/OffertaSpeciale/create}"
+			class="btn btn-primary"
+			>Aggiungi offerta speciale</a>
+		
+			<h3>
+				Ingredienti:
+			</h3>
+			<ul>
+				<li th:each="ingrediente : ${ingredienti}" th:object="${ingrediente}" class="my-1">
+					<span>[[ *{name} ]]</span>
+				</li>
+			</ul>
+			<a
+			th:href="@{/ingredienti/create}"
+			class="btn btn-primary"
+			>Aggiungi ingrediente</a>
+		</div>
+		
+		
+		
+		<div class="d-flex justify-content-center">
+			<img style="width: 400px;" alt="pizza" th:src="${pizza.imgUrl}">
+		</div>
+		
+		
+		
+		<a th:replace="fragments :: backHome()"></a>
+		
+	</body>
+</html>

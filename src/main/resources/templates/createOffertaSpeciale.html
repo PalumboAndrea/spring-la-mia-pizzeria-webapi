@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>Crea Offerta</title>
+		<link rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.3/css/bootstrap.min.css}"/>
+	</head>
+	<body class="container-fluid" th:object="${offertaSpeciale}">
+		
+		<h1>
+			Create la tua Offerta Speciale!
+		</h1>
+		
+		<form class="row g-3" method="POST">
+		
+			<select name="pizza">
+				<option
+					th:each="pizza : ${pizze}"
+					th:object="${pizza}"
+					th:value="*{id}"
+				>
+					[[ *{name} ]]
+				</option>
+			</select>
+		
+		  <div class="col-12">
+		    <label class="form-label">Titolo</label>
+		    <input type="text" class="form-control" name="title" th:value="*{title}">
+		    <label 
+				style="color: red"
+				th:if="${errors != null && errors.hasFieldErrors('title')}"
+			>
+				[[ ${errors.getFieldError('title').defaultMessage} ]]
+			</label>
+		  </div>
+		  
+		  <div class="col-6">
+		    <label class="form-label">Data inizio</label>
+		    <input type="date" class="form-control" name="startingDate" th:value="*{startingDate}">
+		    <label 
+				style="color: red"
+				th:if="${errors != null && errors.hasFieldErrors('startingDate')}"
+			>
+				[[ ${errors.getFieldError('startingDate').defaultMessage} ]]
+			</label>
+		  </div>
+		  
+		  <div class="col-6">
+		    <label class="form-label">Data fine</label>
+		    <input type="date" class="form-control" name="endingDate" th:value="*{endingDate}">
+		    <label 
+				style="color: red"
+				th:if="${errors != null && errors.hasFieldErrors('endingDate')}"
+			>
+				[[ ${errors.getFieldError('endingDate').defaultMessage} ]]
+			</label>
+		  </div>
+		  
+		  <div class="col-6">
+		    <label class="form-label">Sconto</label>
+		    <input type="number" class="form-control" name="discount" th:value="*{discount}">
+		    <label 
+				style="color: red"
+				th:if="${errors != null && errors.hasFieldErrors('discount')}"
+			>
+				[[ ${errors.getFieldError('discount').defaultMessage} ]]
+			</label>
+		  </div>
+		  
+		  <div class="col-12 text-center">
+		  	<input type="submit" value="Creala!" class="btn btn-success">
+		  </div>
+
+		
+		</form>
+
+		<a th:replace="fragments :: backHome()"></a>
+	 
+	</body>
+</html>
