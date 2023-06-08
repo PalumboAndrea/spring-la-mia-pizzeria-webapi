@@ -41,11 +41,27 @@ public class PizzaService {
 	}
 	
 	@Transactional
-	public Optional<Pizza> findByIdWithOffertaSpeciale(int id) {
-		
-		Optional<Pizza> pizzaOpt = pizzaRepository.findById(id);
-		Hibernate.initialize(pizzaOpt.get().getOfferteSpeciali());
-		
-		return pizzaOpt;
+	public Optional<Pizza> findByIdwithSpecialOffer(Integer id) {
+		Optional<Pizza> oPizza = pizzaRepository.findById(id);
+		Hibernate.initialize(oPizza.get().getOfferteSpeciali());
+	
+	return oPizza;
+	}
+	
+	@Transactional
+	public Optional<Pizza> findByIdwithIngredients(Integer id) {
+		Optional<Pizza> oPizza = pizzaRepository.findById(id);
+		Hibernate.initialize(oPizza.get().getIngredienti());
+	
+	return oPizza;
+	}
+	
+	@Transactional
+	public Optional<Pizza> findByIdwithIngredientsAndOffer(Integer id) {
+		Optional<Pizza> oPizza = pizzaRepository.findById(id);
+		Hibernate.initialize(oPizza.get().getIngredienti());
+		Hibernate.initialize(oPizza.get().getOfferteSpeciali());
+	
+	return oPizza;
 	}
 }

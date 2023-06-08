@@ -3,6 +3,14 @@ package com.example.demo.pojo;
 import java.util.Arrays;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -13,13 +21,15 @@ import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;
 
 @Entity
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Pizza {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	@OneToMany(mappedBy = "pizza")
+	@OneToMany(mappedBy = "pizza", cascade = CascadeType.REMOVE)
+//	@JsonManagedReference
 	private List<OffertaSpeciale> offerteSpeciali;
 	
 	@ManyToMany
@@ -50,6 +60,10 @@ public class Pizza {
 	}
 	public void setOfferteSpeciali(List<OffertaSpeciale> offerteSpeciali) {
 		this.offerteSpeciali = offerteSpeciali;
+	}
+	@SuppressWarnings("unlikely-arg-type")
+	public void removeOfferteSpeciali(List<OffertaSpeciale> offerteSpeciali) {
+		getOfferteSpeciali().remove(offerteSpeciali);
 	}
 	
 	public int getId() {
@@ -85,6 +99,7 @@ public class Pizza {
 	public List<Ingrediente> getIngredienti() {
 		return ingredienti;
 	}
+	@JsonSetter
 	public void setIngredienti(List<Ingrediente> ingredienti) {
 		
 		this.ingredienti = ingredienti;

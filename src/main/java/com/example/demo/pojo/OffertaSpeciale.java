@@ -4,6 +4,10 @@ import java.time.LocalDate;
 
 import org.hibernate.validator.constraints.Range;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -17,6 +21,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 @Entity
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class OffertaSpeciale {
 	
 	@Id
@@ -25,9 +30,10 @@ public class OffertaSpeciale {
 	
 	@ManyToOne
 	@JoinColumn(nullable = false)
+	@JsonBackReference
 	private Pizza pizza;
 
-	@FutureOrPresent(message = "La data deve essere o oggi o nel futuro")
+//	@FutureOrPresent(message = "La data deve essere o oggi o nel futuro")
 	private LocalDate startingDate;
 	
 	@Future(message = "La data deve essere nel futuro")

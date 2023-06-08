@@ -2,6 +2,11 @@ package com.example.demo.pojo;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -9,6 +14,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 
 @Entity
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Ingrediente {
 
 	@Id
@@ -18,6 +24,7 @@ public class Ingrediente {
 	private String name;
 	
 	@ManyToMany(mappedBy = "ingredienti")
+	@JsonBackReference
 	private List<Pizza> pizze;
 	
 	public Ingrediente() { }

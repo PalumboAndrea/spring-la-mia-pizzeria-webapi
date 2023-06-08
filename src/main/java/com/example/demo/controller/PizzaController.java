@@ -137,7 +137,7 @@ public class PizzaController {
 	
 	@GetMapping("/pizze/delete/{id}")
 	public String deletePizza(
-			@PathVariable int id
+			@PathVariable Integer id
 		) {
 		
 		Optional<Pizza> optPizza = pizzaService.findById(id);
